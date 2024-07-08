@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Profile :: TMS')
+@section('title', 'Profile')
 
 @section('content')
     @include('layouts.contents.users.update_profile')
