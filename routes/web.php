@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RolesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +22,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+//permissions
+Route::resource('permissions', PermissionController::class);
+Route::get('permissions/{permissionID}/delete', [PermissionController::class, 'destroy']);
+
+//roles
+Route::resource('roles', RolesController::class);
+Route::get('roles/{roleID}/delete', [RolesController::class, 'destroy']);
+//    ->middleware('permission:delete role');
+Route::get('roles/{roleID}/assign-permissions', [RolesController::class, 'assignPermissionToRole']);
+Route::put('roles/{roleID}/assign-permissions', [RolesController::class, 'givePermissionToRole']);
